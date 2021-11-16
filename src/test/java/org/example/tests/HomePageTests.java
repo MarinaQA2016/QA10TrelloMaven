@@ -20,7 +20,7 @@ public class HomePageTests extends TestBase{
 
     @Test
     public void trelloApplStart(){
-        Assert.assertEquals("Manage Your Team’s Projects From Anywhere | Trello",homePage.getApplTitle(),
+        Assert.assertEquals(homePage.getApplTitle(), "Trello",
                 "The title of the application is not corresponds to expected title");
     }
 

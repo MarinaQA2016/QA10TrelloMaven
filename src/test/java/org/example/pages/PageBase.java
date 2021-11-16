@@ -1,6 +1,7 @@
 package org.example.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,6 +25,14 @@ public class PageBase {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public void scrollingTillElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();",element);
+    }
+    public void scrollingByPixels(WebElement element, int mooveByX, int mooveByY) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy("+ mooveByX + "," + mooveByY + ");");
     }
     public void fillInTextField(WebElement field, String value) {
         field.clear();

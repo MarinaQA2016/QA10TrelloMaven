@@ -1,6 +1,7 @@
 package org.example.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +36,8 @@ public class CurrentBoardPageHelper extends  PageBase{
     WebElement acoountPanelMenuButton;
     @FindBy (css = ".js-open-list-menu")
     List<WebElement>  listMenuIconsList;
-    @FindBy (css = ".js-close-list")
+    //@FindBy (css = ".js-close-list")
+    @FindBy (xpath = "//*[@class= 'js-close-list']/..")
     WebElement archiveListMenu;
 
 
@@ -137,11 +139,18 @@ public class CurrentBoardPageHelper extends  PageBase{
     public void deleteLastList() {
         waitUntiAllElementAreClickable(listMenuIconsList,15);
         int size = listMenuIconsList.size();
+        scrollingTillElement(addListButton);
+        waitUntilElementIsClickable(listMenuIconsList.get(size-1),15);
         deleteListByNumber(size);
     }
 
+
+
     public void deleteListByNumber(int num) {
         listMenuIconsList.get(num-1).click();
+        waitUntilElementIsClickable(submitAddCardButton,15);
+        scrollingTillElement(archiveListMenu);
+        //sleep(3000);
         waitUntilElementIsClickable(archiveListMenu,20);
         archiveListMenu.click();
         waitUntilAllElementsAreInVisible(driver.findElements(By.cssSelector(".js-close-list")),20);

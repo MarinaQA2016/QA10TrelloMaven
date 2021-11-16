@@ -72,6 +72,7 @@ public class CurrentBoardPageTests extends TestBase{
         }
         int quantityListsBefore = qa10HaifaCurrentBoard.getNumberOfLists();
         System.out.println("Before " + quantityListsBefore);
+
         qa10HaifaCurrentBoard.deleteLastList();
         int quantityListsAfter = qa10HaifaCurrentBoard.getNumberOfLists();
         System.out.println("After " + quantityListsAfter);
