@@ -2,6 +2,7 @@ package org.example.tests;
 
 
 import org.example.pages.*;
+import org.example.util.DataProviders;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -42,15 +43,15 @@ public class CurrentBoardPageTests extends TestBase{
                 "The final quantity of the lists is not lists quantity at the beginning + 1");
 
     }
-    @Test
-    public void addNewCard()  {
+    @Test (dataProviderClass = DataProviders.class, dataProvider = "cardCreating")
+    public void addNewCard(String name)  {
         if (qa10HaifaCurrentBoard.getNumberOfLists()==0){
             qa10HaifaCurrentBoard.createNewList("firstList");
         }
         // ------ Receive cards quantity before the test running -------
         int cardsBegin = qa10HaifaCurrentBoard.getNumberOfCards();
-        qa10HaifaCurrentBoard.addNewCard("New Card");
-
+        //qa10HaifaCurrentBoard.addNewCard("New Card");
+        qa10HaifaCurrentBoard.addNewCard(name);
 
         // ------ Receive cards quantity after the test running -------
         int cardsEnd = qa10HaifaCurrentBoard.getNumberOfCards();
