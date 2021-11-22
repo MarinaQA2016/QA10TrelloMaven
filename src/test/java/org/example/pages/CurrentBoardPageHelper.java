@@ -150,12 +150,13 @@ public class CurrentBoardPageHelper extends  PageBase{
         listMenuIconsList.get(num-1).click();
         waitUntilElementIsClickable(submitAddCardButton,15);
         scrollingTillElement(archiveListMenu);
-        //sleep(3000);
+        sleep(500);
         waitUntilElementIsClickable(archiveListMenu,20);
         archiveListMenu.click();
         waitUntilAllElementsAreInVisible(driver.findElements(By.cssSelector(".js-close-list")),20);
 
-
-
+    }
+    public String getHeaderText(){
+        return boardHeader.getText();
     }
 }

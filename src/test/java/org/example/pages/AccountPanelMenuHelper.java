@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 public class AccountPanelMenuHelper extends PageBase{
     @FindBy (xpath = "//*[@href='/marinaqatestttest/activity']")
     WebElement activityMenu;
+    @FindBy (xpath = "//span[contains(text(),'Help')]/..")
+    WebElement helpMenu;
     @FindBy (xpath = "//span[contains(text(),'@')]")
     WebElement emailOnAccountPanel;
 
@@ -17,6 +19,7 @@ public class AccountPanelMenuHelper extends PageBase{
     public AccountPanelMenuHelper waitUntilPageIsOpen() {
         waitUntilElementIsClickable(activityMenu,20);
         waitUntilElementIsVisible(emailOnAccountPanel,10);
+        waitUntilElementIsClickable(helpMenu,10);
         return this;
     }
 
@@ -27,5 +30,9 @@ public class AccountPanelMenuHelper extends PageBase{
     public AccountPanelMenuHelper openActivityMenuPage() {
         activityMenu.click();
         return this;
+    }
+    public AccountPanelMenuHelper openHelpMenuPage(){
+        helpMenu.click();
+    return this;
     }
 }

@@ -39,6 +39,23 @@ public class PageBase {
         field.click();
         field.sendKeys(value);
     }
+    public String getAnotherHandle(){
+        String currentHandle = driver.getWindowHandle();
+        String anotherHandle = "";
+        for (String handle: driver.getWindowHandles()){
+            if (!handle.equals(currentHandle)) anotherHandle = handle;
+        }
+        return anotherHandle;
+    }
+
+    public void switchToAnotherWindow() {
+        driver.switchTo().window(this.getAnotherHandle());
+    }
+    public void closeNotLastWindow(){
+        String anotherHandle = getAnotherHandle();
+        driver.close();
+        driver.switchTo().window(anotherHandle);
+    }
 
     public void waitUntilElementIsVisible(By locator, int time) {
         try {
@@ -47,7 +64,13 @@ public class PageBase {
             e.printStackTrace();
         }
     }
-
+    public void waitUntilNumberOfWindowsIs(int number, int time) {
+        try {
+            new WebDriverWait(driver,time).until(ExpectedConditions.numberOfWindowsToBe(number));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void waitUntilElementIsVisible(WebElement element, int time) {
         try {
             new WebDriverWait(driver,time).until(ExpectedConditions.visibilityOf(element));
