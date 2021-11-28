@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.example.SuiteConfiguration;
+import org.example.util.LogLog4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Capabilities;
 
@@ -25,6 +26,7 @@ public class TestBase {
   public static final String EMAIL = "marinaqatest2019@gmail.com";
   public static final String PASSWORD = "marinaqa";
   protected WebDriver driver;
+  public static LogLog4j log4j = new LogLog4j();
 
   @BeforeSuite
   public void initTestSuite() throws IOException {

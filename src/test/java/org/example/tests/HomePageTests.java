@@ -20,8 +20,14 @@ public class HomePageTests extends TestBase{
 
     @Test
     public void trelloApplStart(){
+        log4j.info("");
+        log4j.info("=== Start test case 'trelloApplStart' ===");
+        log4j.info("Check that the title is 'Trello'");
         Assert.assertEquals(homePage.getApplTitle(), "Trello",
                 "The title of the application is not corresponds to expected title");
+        log4j.info("=== End Tests ====");
+        log4j.info("");
+        log4j.info("");
     }
 
     @Test

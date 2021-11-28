@@ -57,8 +57,12 @@ public class LoginPageHelper extends PageBase {
     }
 
     public LoginPageHelper loginNotAttl(String email, String password) {
+        log4j.info(">>>LoginPagehHelper - loginNotAttl(" + email +"," + password + ") method was started");
+        log4j.info("Fill email = " + email);
         this.fillEmailField(email);
+        log4j.info("Fill password, not attl= " + password);
         this.fillPasswordFieldNotAttl(password);
+        log4j.info(" Click on 'login' button");
         this.clickLoginButtonNotAttl();
         return  this;
 

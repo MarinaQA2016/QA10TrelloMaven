@@ -3,6 +3,7 @@ package org.example.tests;
 
 import org.example.pages.*;
 import org.example.util.DataProviders;
+import org.example.util.LogLog4j;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -14,6 +15,7 @@ public class LoginPageTests extends TestBase{
     HomePageHelper homePage;
     LoginPageHelper loginPage;
     BoardsPageHelper boardsPage;
+
 
     @BeforeMethod
     public void initTests()  {
@@ -27,10 +29,14 @@ public class LoginPageTests extends TestBase{
 
     @Test
     public void loginNegativeNoEmail()  {
+        log4j.info("=== Start test case 'loginNegativeNoEmail==='");
+        log4j.info("Enter email= '', password = '12345678'");
         loginPage.loginNotAttl("","12345678");
+        log4j.info("Check that appears an error message 'Missing emai'");
 
         Assert.assertEquals("Missing email", loginPage.getErrorMessageNotAttl(),
                 "The final error-message is not 'Missing email'");
+        log4j.info("=== End the test case ====");
     }
 
     @Test
@@ -51,9 +57,17 @@ public class LoginPageTests extends TestBase{
 
     @Test (dataProviderClass = DataProviders.class, dataProvider = "loginNegativeIncorrectEmailParametric")
     public void loginNegativeIncorrectEmailParametric(String login, String password, String message){
+        log4j.info("");
+        log4j.info("==== Start testCase 'loginNegativeIncorrectEmailParametric', login=" + login + ", password=" + password+
+                ", message=" + message +"=====");
+        log4j.info("Enter login=" + login + ", password=" +  password);
         loginPage.loginNotAttl(login,password);
+        log4j.info("Check that the message on the screen is '" + message + "'");
         Assert.assertEquals(message, loginPage.getErrorMessageNotAttl(),
                 "The error-message is not" + message);
+        log4j.info("=== End Tests ====");
+        log4j.info("");
+        log4j.info("");
     }
 
     @Test (dataProviderClass = DataProviders.class, dataProvider = "loginNotEmailParametric")
