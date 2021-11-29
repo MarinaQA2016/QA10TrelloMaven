@@ -17,8 +17,10 @@ public class HomePageHelper extends PageBase{
     }
 
     public HomePageHelper waitUntilPageIsLoaded() {
+        log4j.startMethod("HomePageHelper : waitUntilPageIsLoaded");
         waitUntilElementIsClickable(loginIcon,10);
         waitUntilElementIsClickable(signUpButton,10);
+        log4j.endMethod("HomePageHelper : waitUntilPageIsLoaded");
         return this;
     }
 
@@ -37,7 +39,9 @@ public class HomePageHelper extends PageBase{
 
 
     public HomePageHelper openLoginPage() {
+        log4j.startMethod("HomePageHelper : openLoginPage");
         loginIcon.click();
+        log4j.endMethod("HomePageHelper : openLoginPage");
         return this;
     }
 }

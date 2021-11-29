@@ -19,12 +19,14 @@ public class LoginPageTests extends TestBase{
 
     @BeforeMethod
     public void initTests()  {
+        log4j.startMethod("@BeforeMethod - initTests");
         homePage = PageFactory.initElements(driver, HomePageHelper.class);
         loginPage = PageFactory.initElements(driver,LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver, BoardsPageHelper.class);
         homePage.waitUntilPageIsLoaded()
                 .openLoginPage();
         loginPage.waitUntilPageIsLoaded();
+        log4j.endMethod("@BeforeMethod - initTests");
     }
 
     @Test
@@ -57,17 +59,16 @@ public class LoginPageTests extends TestBase{
 
     @Test (dataProviderClass = DataProviders.class, dataProvider = "loginNegativeIncorrectEmailParametric")
     public void loginNegativeIncorrectEmailParametric(String login, String password, String message){
-        log4j.info("");
-        log4j.info("==== Start testCase 'loginNegativeIncorrectEmailParametric', login=" + login + ", password=" + password+
-                ", message=" + message +"=====");
+        log4j.startTestCase("loginNegativeIncorrectEmailParametric");
+        log4j.parameter("login",login);
+        log4j.parameter("password",password);
+        log4j.parameter("message",message);
         log4j.info("Enter login=" + login + ", password=" +  password);
         loginPage.loginNotAttl(login,password);
         log4j.info("Check that the message on the screen is '" + message + "'");
         Assert.assertEquals(message, loginPage.getErrorMessageNotAttl(),
                 "The error-message is not" + message);
-        log4j.info("=== End Tests ====");
-        log4j.info("");
-        log4j.info("");
+        log4j.endTestCase2();
     }
 
     @Test (dataProviderClass = DataProviders.class, dataProvider = "loginNotEmailParametric")

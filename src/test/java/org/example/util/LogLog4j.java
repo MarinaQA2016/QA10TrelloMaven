@@ -21,6 +21,9 @@ public class LogLog4j {
         rowCount++;
 
     }
+    public static void parameter (String parameterName, String parameterValue){
+        Log.info(" ==> Parameter " + parameterName + " = '" + parameterValue + "'");
+    }
 
     //This is to print log for the ending of the test case
     public static void startMethod(String methodName) {
