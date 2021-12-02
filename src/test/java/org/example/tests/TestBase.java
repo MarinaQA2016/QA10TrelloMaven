@@ -1,18 +1,20 @@
 package org.example.tests;
 
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+
+import com.google.common.io.Files;
 import org.example.SuiteConfiguration;
 import org.example.util.LogLog4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.*;
 
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -48,8 +50,21 @@ public class TestBase {
     @Override
     public void onException(Throwable throwable, WebDriver driver) {
       log4j.error("Error " + throwable);
+      //takePicture((TakesScreenshot) driver);
     }
   }
+
+  public static void takePicture(TakesScreenshot driver) {
+    File tmp = driver.getScreenshotAs(OutputType.FILE);
+    File screen = new File("screen-"+System.currentTimeMillis() +".png");
+    try {
+      Files.copy(tmp,screen);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    log4j.info("see screen " + screen);
+  }
+
 
   @BeforeSuite
   public void initTestSuite() throws IOException {
@@ -67,7 +82,14 @@ public class TestBase {
     driver.register(new MyListener());
     driver.get(baseUrl);
   }
+  @AfterMethod
+  public void finishTest(ITestResult result){
+    if (result.getStatus()==ITestResult.FAILURE) {
+      log4j.error (" Test was failure ");
+      takePicture((TakesScreenshot) driver);
+    }
 
+  }
   @AfterMethod(alwaysRun = true)
   public void tearDown() {
     WebDriverPool.DEFAULT.dismissAll();
