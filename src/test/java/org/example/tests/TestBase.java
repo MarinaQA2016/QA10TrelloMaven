@@ -12,6 +12,7 @@ import org.example.util.LogLog4j;
 import org.openqa.selenium.*;
 
 
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestResult;
@@ -32,8 +33,8 @@ public class TestBase {
   protected static Capabilities capabilities;
   public static final String EMAIL = "marinaqatest2019@gmail.com";
   public static final String PASSWORD = "marinaqa";
-  //protected WebDriver driver;
-  protected EventFiringWebDriver driver;
+  protected WebDriver driver;
+  //protected EventFiringWebDriver driver;
   public static LogLog4j log4j = new LogLog4j();
 
   public static class MyListener extends AbstractWebDriverEventListener {
@@ -78,15 +79,19 @@ public class TestBase {
 
   @BeforeMethod(alwaysRun = true)
   public void initWebDriver() {
-    driver = new EventFiringWebDriver(WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities));
-    driver.register(new MyListener());
+    ChromeOptions options = new ChromeOptions();
+    options.setHeadless(true);
+    options.addArguments("--disable-gpu");
+   //driver = new EventFiringWebDriver(WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities));
+    driver = WebDriverPool.DEFAULT.getDriver(gridHubUrl, options);
+    //driver.register(new MyListener());
     driver.get(baseUrl);
   }
   @AfterMethod(alwaysRun = true)
   public void finishTest(ITestResult result){
     if (result.getStatus()==ITestResult.FAILURE) {
       log4j.error (" Test was failure ");
-      takePicture((TakesScreenshot) driver);
+      //takePicture((TakesScreenshot) driver);
     }
 
   }
