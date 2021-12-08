@@ -17,7 +17,7 @@ public class LoginPageTests extends TestBase{
     BoardsPageHelper boardsPage;
 
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initTests()  {
         log4j.startMethod("@BeforeMethod - initTests");
         homePage = PageFactory.initElements(driver, HomePageHelper.class);
@@ -29,7 +29,7 @@ public class LoginPageTests extends TestBase{
         log4j.endMethod("@BeforeMethod - initTests");
     }
 
-    @Test
+    @Test (groups = "sanity")
     public void loginNegativeNoEmail()  {
         log4j.info("=== Start test case 'loginNegativeNoEmail==='");
         log4j.info("Enter email= '', password = '12345678'");
@@ -41,7 +41,7 @@ public class LoginPageTests extends TestBase{
         log4j.info("=== End the test case ====");
     }
 
-    @Test
+    @Test(groups = {"sanity","system","regression"})
     public void loginNegativeLoginNotEmail()  {
         loginPage.loginNotAttl("gjgywggjwhdg","12345678");
 
@@ -57,7 +57,7 @@ public class LoginPageTests extends TestBase{
                 "The error-message is not 'There isn't an account for this email'");
     }
 
-    @Test (dataProviderClass = DataProviders.class, dataProvider = "loginNegativeIncorrectEmailParametric")
+    @Test (groups = {"sanity","regression"}, dataProviderClass = DataProviders.class, dataProvider = "loginNegativeIncorrectEmailParametric")
     public void loginNegativeIncorrectEmailParametric(String login, String password, String message){
         log4j.startTestCase("loginNegativeIncorrectEmailParametric");
         log4j.parameter("login",login);
@@ -87,7 +87,7 @@ public class LoginPageTests extends TestBase{
     }
 
 
-    @Test (dataProviderClass = DataProviders.class, dataProvider = "loginPositive")
+    @Test (groups="regression", dataProviderClass = DataProviders.class, dataProvider = "loginPositive")
     public void loginPositive(String login, String password)  {
         //loginPage.loginAttl(EMAIL,PASSWORD);
         loginPage.loginAttl(login,password);

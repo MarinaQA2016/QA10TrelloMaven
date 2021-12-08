@@ -11,14 +11,14 @@ import org.testng.annotations.Test;
 public class HomePageTests extends TestBase{
     HomePageHelper homePage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initTests(){
         //homePage = new HomePageHelper(driver);
         homePage = PageFactory.initElements(driver,HomePageHelper.class);
         homePage.waitUntilPageIsLoaded();
     }
 
-    @Test
+    @Test(groups = {"sanity","system"})
     public void trelloApplStart(){
         log4j.info("");
         log4j.info("=== Start test case 'trelloApplStart' ===");
@@ -36,7 +36,7 @@ public class HomePageTests extends TestBase{
                 "The name of the button is not 'Log in'");
     }
 
-    @Test
+    @Test(groups = {"sanity","regression"})
     public void checkSignUpButton(){
         Assert.assertEquals("Sign up", homePage.getSignUpIconName(),
                 "Name of the button is not 'Sign Up'");
