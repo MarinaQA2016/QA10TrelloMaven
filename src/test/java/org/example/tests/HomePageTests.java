@@ -13,7 +13,7 @@ public class HomePageTests extends TestBase{
 
     @BeforeMethod(alwaysRun = true)
     public void initTests(){
-        //homePage = new HomePageHelper(driver);
+        //homePage = new HomePageHelper(driver); comments
         homePage = PageFactory.initElements(driver,HomePageHelper.class);
         homePage.waitUntilPageIsLoaded();
     }
@@ -35,7 +35,6 @@ public class HomePageTests extends TestBase{
         Assert.assertEquals("Log in",homePage.getLoginIconName(),
                 "The name of the button is not 'Log in'");
     }
-
 
     @Test(groups = {"sanity","regression"})
     public void checkSignUpButton(){
