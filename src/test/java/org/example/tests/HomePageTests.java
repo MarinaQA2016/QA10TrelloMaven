@@ -36,6 +36,7 @@ public class HomePageTests extends TestBase{
                 "The name of the button is not 'Log in'");
     }
 
+
     @Test(groups = {"sanity","regression"})
     public void checkSignUpButton(){
         Assert.assertEquals("Sign up", homePage.getSignUpIconName(),
