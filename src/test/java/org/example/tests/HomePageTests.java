@@ -13,7 +13,7 @@ public class HomePageTests extends TestBase{
 
     @BeforeMethod(alwaysRun = true)
     public void initTests(){
-        //homePage = new HomePageHelper(driver); comments
+        //homePage = new HomePageHelper(driver);
         homePage = PageFactory.initElements(driver,HomePageHelper.class);
         homePage.waitUntilPageIsLoaded();
     }
